@@ -4,7 +4,10 @@ import {ref} from "vue";
 
 const username = prompt("Enter your username");
 
-const socket = io('https://chatapp-server-production-85c9.up.railway.app')
+const socket = io('https://chatapp-server-production-85c9.up.railway.app', {
+  query: {username}
+})
+
 const messages = ref([])
 
 const inputField = ref(null)
@@ -12,6 +15,7 @@ const inputField = ref(null)
 console.log(socket)
 
 socket.on('message', (username, message) => {
+  console.log(username, message)
   messages.value.push({username, message})
 })
 
@@ -29,7 +33,7 @@ const sendMessage = (event) => {
   <div>
     <form @submit.prevent="sendMessage">
       <p v-for="msgData in messages">{{ msgData.username }}: {{ msgData.message }}</p>
-      <input ref="inputField" type="text" name="message" placeholder="Enter message" required />
+      <input ref="inputField" type="text" name="message" placeholder="Enter message" required/>
       <button>send</button>
     </form>
 
