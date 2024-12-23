@@ -32,7 +32,7 @@ const sendMessage = (event) => {
 <template>
   <div>
     <form @submit.prevent="sendMessage">
-      <p v-for="msgData in messages">{{ msgData.username }}: {{ msgData.message }}</p>
+      <p v-for="message in messages">{{message.username}}: {{message.message}}</p>
       <input ref="inputField" type="text" name="message" placeholder="Enter message" required/>
       <button>send</button>
     </form>
